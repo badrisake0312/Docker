@@ -38,6 +38,10 @@ docker start <customname> --> Start container
 docker exec -it <customname> /bin/bash
 docker rmi nginx --> to remove docker image
 docker rmi <imageid>
+-------------
+Container Remove
+-------------
+docker rm $(docker ps -a -q)---> remove or delect all containers
 
 Docker Networking
 -------------------------
@@ -53,4 +57,22 @@ docker run -d --name <customname> -p 8080:80 httpd
 docker run -d --name <customname> -p 8081:80 nginx
 docker run -d --name <customname> --net host httpd
 docker run -d --name <customname> --net nome httpd
+
+----------------
+Docker Volumes
+---------------
+docker volume create <customname>
+docker volume ls
+docker run -it --name=srv01 --mount source=<customname>,destination=/data centos
+docker run -it --name srv04 -v testvol1:data centos
+docker run -it --volumes-from srv01 --name srv02 centos /bin/bash
+docker volume inspect <volumeid>
+docker volume rm <volumeid>
+docker volume prune  ---> if volume are not used for any container, it will delect all the unused volumes
+-----------------------------------------------------------
+Dynamically to create volume along with container creation
+-----------------------------------------------------------
+root@ip-10-52-1-190:/docker_vol/files# docker run -it --name srv05 -v "$(pwd)":/data1 centos
+
+
 
