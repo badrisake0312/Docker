@@ -16,6 +16,60 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 docker --version
 
+Docker File ---> Docker Image --> Docker Container
+-----------
+Docker File
+-----------
+FROM defines the base image used to start the build process.
+ADD copies the files from a source on the host into the container's own filesystem at the set destination.
+COPY copies the files from a source on the host into the containe's own filesystem at the set destination.
+
+diff b/w ADD and COPY
+In ADD source can be a URL, but in COPY you have to copy the files from same machine to container.
+If any Zip file or TAR file you need to execute in container, ADD can extract or Unzip file automatically, but COPY didn't do.
+
+CMD can be used for executing a specific command within the container (or) if container starts then the command you want to run in the container.
+ENTRYPOINT sets a default application to be used every time a container is created with the image.
+ENV sets environment variables.
+EXPOSE associates a specific port to enable networking between the container and to the outside.
+MAINTAINER defines a full name and email address of the image creator.
+RUN is the central executing directive for Dockerfiles.
+USER sets the UID(or Username) which is to run the container
+VOLUME is used to enable access fromt the container to a directory on the host machine.
+WORKDIR sets the path where the command, defined with CMD, is to be executed.
+LABLE allows you to add a lable to your docker images.
+-------------------
+Sample Docker File
+-------------------
+FROM ubuntu:latest
+LABLE maintainer="badrisake0312@gmail.com"
+RUN apt-get update && apt-get -y install nginx
+EXPOSE 80
+ENTRYPOINT ["/usr/sbin/nginx"]
+CMD ["-D", "FOREGROUND"]
+
+root@ip-10-52-1-190:/dockerfiles/ubuntu_nginx_plain# vi dockerfile
+root@ip-10-52-1-190:/dockerfiles/ubuntu_nginx_plain# docker build -t badri/nginx .
+[+] Building 12.5s (6/6) FINISHED                                                                                                              docker:default
+ => [internal] load build definition from dockerfile                                                                                                     0.0s
+ => => transferring dockerfile: 214B                                                                                                                     0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:latest                                                                                         0.4s
+ => [internal] load .dockerignore                                                                                                                        0.0s
+ => => transferring context: 2B                                                                                                                          0.0s
+ => [1/2] FROM docker.io/library/ubuntu:latest@sha256:80dd3c3b9c6cecb9f1667e9290b3bc61b78c2678c02cbdae5f0fea92cc6734ab                                   2.4s
+ => => resolve docker.io/library/ubuntu:latest@sha256:80dd3c3b9c6cecb9f1667e9290b3bc61b78c2678c02cbdae5f0fea92cc6734ab                                   0.1s
+ => => sha256:80dd3c3b9c6cecb9f1667e9290b3bc61b78c2678c02cbdae5f0fea92cc6734ab 6.69kB / 6.69kB                                                           0.0s
+ => => sha256:6e75a10070b0fcb0bead763c5118a369bc7cc30dfc1b0749c491bbb21f15c3c7 424B / 424B                                                               0.0s
+ => => sha256:b1d9df8ab81559494794e522b380878cf9ba82d4c1fb67293bcf931c3aa69ae4 2.30kB / 2.30kB                                                           0.0s
+ => => sha256:de44b265507ae44b212defcb50694d666f136b35c1090d9709068bc861bb2d64 29.75MB / 29.75MB                                                         0.6s
+ => => extracting sha256:de44b265507ae44b212defcb50694d666f136b35c1090d9709068bc861bb2d64                                                                1.4s
+ => [2/2] RUN apt-get update && apt-get -y install nginx                                                                                                 9.2s
+ => exporting to image                                                                                                                                   0.4s
+ => => exporting layers                                                                                                                                  0.4s
+ => => writing image sha256:0587b182183e087948f8cfcc3a229aabbe4bf5e436f687a438d6422bdda11054                                                             0.0s
+ => => naming to docker.io/badri/nginx                                                                                                                   0.0s
+
+
 docker pull nginx
 docker images or docker image ls
 docker create <imageid>
