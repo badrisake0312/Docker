@@ -127,6 +127,10 @@ docker volume prune  ---> if volume are not used for any container, it will dele
 Dynamically to create volume along with container creation
 -----------------------------------------------------------
 root@ip-10-52-1-190:/docker_vol/files# docker run -it --name srv05 -v "$(pwd)":/data1 centos
+---------------------------------
+Multi-Container App Using Docker 
+---------------------------------
+
 
 
 
