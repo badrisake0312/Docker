@@ -1,0 +1,56 @@
+# Add Docker's official GPG key:
+sudo su - root
+cd /
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+docker --version
+
+docker pull nginx
+docker images or docker image ls
+docker create <imageid>
+docker ps
+docker ps -a
+docker start <containerid> or <containername>
+docker stop <containerid> or <containername>
+------------
+Custom Name
+------------
+docker create --name <customname> nginx
+docker rm <customname>
+-------------
+Create, Start, Login into the container
+-------------
+docker run --name <customname> nginx  --> Create, Start, Login into the container
+docker run -d --name <customname> nginx  --> Create, Start, but didn't login to container
+docker kill <customname> --> forcefully stop container
+docker start <customname> --> Start container
+docker exec -it <customname> /bin/bash
+docker rmi nginx --> to remove docker image
+docker rmi <imageid>
+
+Docker Networking
+-------------------------
+docker network ls
+
+NETWORK ID     NAME      DRIVER    SCOPE
+7a786f63b948   bridge    bridge    local
+0a7b7a5e50f2   host      host      local
+e6f3df89d5be   none      null      local
+
+docker network inspect bridge
+docker run -d --name <customname> -p 8080:80 httpd
+docker run -d --name <customname> -p 8081:80 nginx
+docker run -d --name <customname> --net host httpd
+docker run -d --name <customname> --net nome httpd
+
