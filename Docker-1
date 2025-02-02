@@ -1,0 +1,23 @@
+mkdir docker
+git clone https://github.com/narayanacharan/mern_docker_demo.git
+
+root@ip-10-52-1-190:/docker/mern_docker_demo# ls
+LICENSE  README.md  client  docker-compose.yml  nginx  server  testfork.txt
+root@ip-10-52-1-190:/docker/mern_docker_demo# ls -ltr
+
+docker network create library-mern-api
+docker network ls
+NETWORK ID     NAME               DRIVER    SCOPE
+4607b1d995f0   bridge             bridge    local
+091647728c95   host               host      local
+f7f5644af906   library-mern-api   bridge    local
+9ccc5a935b58   none               null      local
+root@ip-10-52-1-190:/docker/mern_docker_demo# docker volume create mongodb-data
+mongodb-data
+docker run -dit -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD -e PWD=/ -v  mongodb-data:/data/db --name mern_library_nginx_mongodb_1 --net library-mern-api mongo
+--------------------------
+Docker Compose
+--------------------------
+Docker Compose is a tool that allows you to define and run multi-container Docker applications.
+apt install docker-compose
+docker-compose --version
