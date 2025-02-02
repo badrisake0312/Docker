@@ -68,8 +68,8 @@ root@ip-10-52-1-190:/dockerfiles/ubuntu_nginx_plain# docker build -t badri/nginx
  => => exporting layers                                                                                                                                  0.4s
  => => writing image sha256:0587b182183e087948f8cfcc3a229aabbe4bf5e436f687a438d6422bdda11054                                                             0.0s
  => => naming to docker.io/badri/nginx                                                                                                                   0.0s
-
-
+docker tag ubuntu ubuntu:v1
+docker push ubuntu:v1
 docker pull nginx
 docker images or docker image ls
 docker create <imageid>
