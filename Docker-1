@@ -31,4 +31,20 @@ prune       Remove unused local volumes
 rm          Remove one or more volumes
 update      Update a volume (cluster volumes only)
 
+docker-compose up -->Start Services
+docker-compose up -d -->Start in Detached Mode (Background)
+docker-compose down -->Stop Services
+docker-compose restart -->docker-compose restart
+docker-compose ps -->View Running Services
+docker-compose build -->Build or Rebuild Images
+docker-compose build --no-cache -->Rebuild Without Cache
+docker-compose up service_name -->Start a Specific Service
+docker-compose stop service_name --> Stop a Specific Service
+docker-compose rm -->Remove Stopped Containers
+docker-compose logs -->View Logs
+docker-compose logs -f -->Follow Live Logs
+
+
+
+
 through docker compose we can do start and stop of multiple containers.
