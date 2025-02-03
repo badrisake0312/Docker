@@ -199,6 +199,23 @@ Stuck container	                      docker rm -f <container_id>
 Cannot connect to a container	        docker network inspect <network_name>
 "Port already in use" error	          docker ps -a → Find the conflicting container and stop/remove it
 MongoDB / MySQL service not starting	Use depends_on in docker-compose.yml or add healthcheck
+---------------------------
+Restart Policies
+---------------------------
+Self-healing Mechanism
+Restart policy by default should show NO
+no : The default behaviour is to not start container autoomatically
+always : Always restart a stopped container unless the container was stopped explicitly(Container automatically stoped by itself) or if docker engine completely restart the also container will regenerate.
+unless-stooped : Restart the container unless the container was in stopped state before the docker daemon was stopped or if container is in stoped state before docker daemon restart, docker platform will continue this container in stoped state only.
+(Automatic-restart Manually-no restart)
+on-failure : restart the container if it exited with a non-zero exit code or if the docker daemon restarts
+docker inspect <containerid>
+docker run --name <container_name> --restart always (image)alpine sleep 10
+docker run --name <container_name> --restart unless-stopped alpine sleep 10
+docker run --name <container_name> --restart on-failure alpine sleep 10
+
+docker inspect <containerid>
+
 
 
 
