@@ -214,7 +214,39 @@ docker run --name <container_name> --restart always (image)alpine sleep 10
 docker run --name <container_name> --restart unless-stopped alpine sleep 10
 docker run --name <container_name> --restart on-failure alpine sleep 10
 
-docker inspect <containerid>
+-------------
+Docker Swarm
+-------------
+What is Docker Swarm
+How is it different from Kubernetes?
+Master-Slave Architecture
+--------------
+    Nodes
+--------------
+Manager Node
+
+API            accepts commands and creates service objects
+Orchestrator   reconcillation loop that creates tasks for service objects
+allocater      allocates ip addresses to taskes
+dispatcher     assigns tasks to nodes
+scheduler      instructs a worker to run a task
+
+Worker Node
+
+worker        connects to dispatcher to check for assigned tasks
+executor      executes tasks assigned to worker node
+
+Docker Swarm Features
+---------------------
+Centralized access
+High security
+Autoload balancing
+High scalability
+Roll-back a task
+
+docker swarm init --advertise-addr 192.168.29.245 --> In manager node (server)
+you will get one docker join --token, run this command in worker node(sever)
+docker node ls
 
 
 
