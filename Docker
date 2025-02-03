@@ -139,8 +139,11 @@ root@ip-10-52-1-190:/docker_vol/files# docker run -it --name srv05 -v "$(pwd)":/
 Troubleshooting Containers
 ------------------------------
 docker logs <containerid>
-docker exec -it <container name> 
+docker exec -it <container name> <commamd>
+docker exec -it <containerid> ls or hostname --> this commands are executed inside the container and showing the output in ec2 server.
+docker exec -it <containerid> /bin/bash --> this command is used to go inside the container.
 docker rename <old_container_name> <new_container_name>
+exit --> to came out from container
 ----------------------------------
 Docker Troubleshooting Commands
 ----------------------------------
