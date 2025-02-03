@@ -21,3 +21,14 @@ Docker Compose
 Docker Compose is a tool that allows you to define and run multi-container Docker applications.
 apt install docker-compose
 docker-compose --version
+docker compose file name should be docker-compose.yml
+docker-compose up ---> this is the command to run containers if the docker compose file name is docker-compose.yaml or .yml
+docker-compose -f docker-compose-file.yml up --> this is the command to run containers for different name of compose file.
+create      Create a volume
+inspect     Display detailed information on one or more volumes
+ls          List volumes
+prune       Remove unused local volumes
+rm          Remove one or more volumes
+update      Update a volume (cluster volumes only)
+
+through docker compose we can do start and stop of multiple containers.
