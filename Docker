@@ -135,9 +135,67 @@ docker volume prune  ---> if volume are not used for any container, it will dele
 Dynamically to create volume along with container creation
 -----------------------------------------------------------
 root@ip-10-52-1-190:/docker_vol/files# docker run -it --name srv05 -v "$(pwd)":/data1 centos
----------------------------------
-Multi-Container App Using Docker 
----------------------------------
+------------------------------
+Troubleshooting Containers
+------------------------------
+docker logs <containerid>
+docker exec -it <container name> 
+docker rename <old_container_name> <new_container_name>
+----------------------------------
+Docker Troubleshooting Commands
+----------------------------------
+Check Docker System Status
+ - systemctl status docker # Check if Docker is running (Linux)
+ - docker info # Show detailed system-wide info
+ - docker version # Show Docker version info
+ - sudo systemctl start docker # Start Docker if not running
+ - sudo systemctl restart docker # Restart Docker
+Check Running Containers
+ - docker ps # Show running containers
+ - docker ps -a # Show all containers (including stopped ones)
+ - docker ps --filter 'status=exited' # Show only exited containers
+Check Logs for Errors
+ - docker logs <container_id> # View logs of a specific container
+ - docker logs -f <container_id> # Live streaming logs (follow mode)
+ - docker-compose logs # Logs for all services in docker-compose
+ - docker-compose logs -f # Live logs for docker-compose services
+Check Disk Space Issues
+ - df -h # Check disk space usage
+ - docker system df # Check Docker disk usage
+ - docker system prune -a -f # Free up space
+Stop, Restart, and Remove Containers
+ - docker stop <container_id> # Stop a running container
+ - docker start <container_id> # Start a stopped container
+ - docker restart <container_id> # Restart a container
+ - docker rm <container_id> # Remove a stopped container
+ - docker rm -f $(docker ps -aq) # Remove all containers forcefully
+Remove Unused Resources (Cleanup)
+ - docker rmi -f $(docker images -aq) # Remove all images
+ - docker volume prune -f # Remove unused volumes
+ - docker network prune -f # Remove unused networks
+ - docker system prune -a -f # Clean up everything
+Check & Fix Network Issues
+ - docker network ls # List all networks
+ - docker network inspect <network_name> # Inspect a network
+ - docker network prune -f # Remove unused networks
+Debug Container Issues
+ - docker inspect <container_id> # Detailed container information
+ - docker exec -it <container_id> sh # Open a shell inside a container (Alpine)
+ - docker exec -it <container_id> bash # Open a shell inside a container (Ubuntu)
+Rebuild and Restart Services in Docker-Compose
+ - docker-compose down
+ - docker-compose up --build -d
+Live Docker Events
+ - docker events # Monitor live system-wide Docker events
+----------------------
+Common Fixes
+----------------------
+Issue	Command to Fix
+No space left on                      device	docker system prune -a -f
+Stuck container	                      docker rm -f <container_id>
+Cannot connect to a container	        docker network inspect <network_name>
+"Port already in use" error	          docker ps -a → Find the conflicting container and stop/remove it
+MongoDB / MySQL service not starting	Use depends_on in docker-compose.yml or add healthcheck
 
 
 
