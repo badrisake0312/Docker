@@ -96,6 +96,14 @@ docker rmi <imageid>
 Container Remove
 -------------
 docker rm $(docker ps -a -q)---> remove or delect all containers
+docker rmi -f $(docker images -aq) -->To remove all Docker images at once, use:
+docker images -aq → Lists all image IDs
+docker rmi -f → Forcefully removes the listed images
+docker rm -f $(docker ps -aq) -->Remove all containers first (to avoid dependency issues)
+docker rmi -f $(docker images -aq) -->Then remove all images
+docker system prune -a -f -->remove everything (containers, images, volumes, networks)
+
+
 
 Docker Networking
 -------------------------
