@@ -17,6 +17,10 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 docker --version
 
 Docker File ---> Docker Image --> Docker Container
+
+docker build -t myimage -f MyDockerfile .  -> . means in the current directory
+
+Here, -f MyDockerfile tells Docker to use a file named MyDockerfile instead of the default Dockerfile.
 -----------
 Docker File
 -----------
@@ -119,6 +123,10 @@ docker run -d --name <customname> -p 8080:80 httpd
 docker run -d --name <customname> -p 8081:80 nginx
 docker run -d --name <customname> --net host httpd
 docker run -d --name <customname> --net nome httpd
+---------------------------
+docker network create <customname>
+docker volume create <customname>
+
 
 ----------------
 Docker Volumes
@@ -248,6 +256,44 @@ docker swarm init --advertise-addr 192.168.29.245 --> In manager node (server)
 you will get one docker join --token, run this command in worker node(sever)
 docker node ls
 
+-----------------
+Docker Compose
+-----------------
+-Docker Compose is a tool that allows you to define and run multi-container Docker Applications
+-It allows you to define the services, networks, and volumes that make up your application in a declarative YAML file, which can then be used to spin up and manage the containers that makes up your application.
+-Using Docker Compose, you can define a group of related services that can be run together in a single environment, making it easier to manage complex appications with multiple componets. For example, you can define a web application with a web server, a database, and a caching layer as separate services, each running in its own container.
+-By default docker compose is not installed along with docker engine.
+ apt install docker-compose
+ docker-compose --version
+
+YAML FILE
+-----------
+version:"3.7"
+
+services:
+  library-api:
+    image:library-api
+  mongodb:
+    image:mongo
+  mongo-express:
+    image:mongo-express
+  client:
+    image:client
+  nginx:
+
+networks:
+  library-mern-api:
+    driver:bridge
+
+volumes:
+  mongodb-data:
+    driver:local
+
+docker compose file name should be docker-compose.yml
+->docker-compose up
+if docker file is in different name like docker-compose-file.yml
+->docker-compose -f docker-compose-file.yml up
+    
 
 
 
