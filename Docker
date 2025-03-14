@@ -256,6 +256,11 @@ docker swarm init --advertise-addr 192.168.29.245 --> In manager node (server)
 you will get one docker join --token, run this command in worker node(sever)
 docker node ls
 
+stack-combination of one or more services, networks, volumes
+services- combinations of one or more tasks
+tasks-task is a defination to deploy a container 
+container- container is an instance of task
+
 -----------------
 Docker Compose
 -----------------
